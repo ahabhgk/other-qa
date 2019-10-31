@@ -1,22 +1,71 @@
-.App {
-  text-align: center;
+.login-id {
+  width: 76vw;
 }
 
-.App-logo {
-  height: 40vmin;
+.login-name {
+  width: 76vw;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.login-wrapper {
+  height: 45vw;
+  margin-top: 55vw;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
 }
 
-.App-link {
-  color: #09d3ac;
+.btn {
+  width: 80vw;
+}
+
+.arrow-align {
+  display: flex;
+  align-items: center;
+}
+
+.qa-wrapper {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.qa-pagination {
+  width: 80vw;
+}
+
+.question {
+  font-size: 5vw;
+  width: 80vw;
+  height: 110vw;
+  padding-top: 20vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.subject {
+  min-height: 20vw;
+}
+
+.answers {
+  height: 55vw;
+  margin: 2vh 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.explain {
+  min-height: 30vw;
+  max-height: 40vw;
+  overflow-y: auto;
+}
+
+.loading {
+  height: 110vw;
+  line-height: 110vw;
+  font-size: 10vw;
 }
