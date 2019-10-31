@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useHistory } from 'react-router-dom'
-import { Toast, Radio, Pagination, Button, Icon, List } from 'antd-mobile'
+import { Toast, Radio, Button, Icon, List } from 'antd-mobile'
 import { API } from '../config'
 
 const RadioItem = Radio.RadioItem
@@ -34,14 +34,6 @@ const QandA = () => {
     setQuestion(all[index.current])
   }, [all])
 
-  const onPrev = () => {
-    if (index.current > 0) {
-      index.current -= 1
-      setQuestion(all[index.current])
-      if (index.current !== 2) setFinish(false)
-    }
-  }
-
   const onNext = () => {
     if (index.current < 2) {
       index.current += 1
@@ -61,8 +53,7 @@ const QandA = () => {
       if (cur.Answer === answers[index]) return acc + 1
       return acc
     }, 0)
-    
-    console.log(num)
+
     try {
       const { Status: status } = await fetch(`${API}/user/put`, {
         method: 'POST',
@@ -74,7 +65,7 @@ const QandA = () => {
       }).then(res => res.json())
 
       if (status === 10000) {
-        Toast.success('答题完成')
+        Toast.success(`答题完成，答对${num}道～`)
         setTimeout(() => history.replace('/'), 2000)
       }
     } catch (e) {
@@ -96,23 +87,11 @@ const QandA = () => {
             <RadioItem checked={answers[index.current] === 'D'} onChange={() => onChange('D')}>D: {question.D}</RadioItem>
           </List>
           <div className="explain">
-            {question.Explain}
+            {answers[index.current] && question.Explain}
           </div>
         </div>
       ) : <div className="loading">Loading...</div>}
-      <Pagination
-        className="qa-pagination"
-        total={3}
-        current={index.current + 1}
-        locale={{
-          prevText: (
-            <span className="arrow-align" onClick={onPrev}><Icon type="left" />上一题</span>
-          ),
-          nextText: (
-            <span className="arrow-align" onClick={onNext}>下一题<Icon type="right" /></span>
-          ),
-        }}
-      />
+      <span className="arrow-align" onClick={onNext}>下一题<Icon type="right" /></span>
       <Button
         onClick={onCommit}
         type="primary"
