@@ -43,9 +43,11 @@ const QandA = () => {
   }
 
   const onChange = val => {
-    const arr = [...answers]
-    arr[index.current] = val
-    setAnswers(arr)
+    if (!answers[index.current]) {
+      const arr = [...answers]
+      arr[index.current] = val
+      setAnswers(arr)
+    }
   }
 
   const onCommit = async () => {

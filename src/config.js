@@ -1,1 +1,1 @@
-export const API = 'http://129.28.185.138:8080'
+export const API = 'http://api-234.redrock.team/question-answer'
