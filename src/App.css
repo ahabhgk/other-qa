@@ -22,25 +22,22 @@
 .arrow-align {
   display: flex;
   align-items: center;
+  height: 10vw;
+  margin: 4vw 0;
 }
 
 .qa-wrapper {
-  height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-}
-
-.qa-pagination {
-  width: 80vw;
+  padding-bottom: 14vw;
 }
 
 .question {
   font-size: 5vw;
   width: 80vw;
-  height: 110vw;
-  padding-top: 20vw;
+  padding-top: 14vw;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -60,7 +57,6 @@
 
 .explain {
   min-height: 30vw;
-  max-height: 40vw;
   overflow-y: auto;
 }
 

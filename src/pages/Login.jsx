@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { InputItem, Button, Toast } from 'antd-mobile'
 import { useHistory } from 'react-router-dom'
 import { API } from '../config'
@@ -8,29 +8,8 @@ const Login = () => {
   const [name, setName] = useState('')
   const history = useHistory()
 
-  const onLogin = async () => {
+  const onLogin = async (id, name) => {
     try {
-      // const xhr = new XMLHttpRequest()
-      // xhr.open('POST', `${API}/user/login`)
-      // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-      // xhr.withCredentials = true
-      // xhr.send(`stuNum=${id}&stuName=${name}`)
-      // xhr.onreadystatechange = () => {
-      //   if (xhr.readyState === 4) {
-      //     if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
-      //       const { Status: status, Done: done } = JSON.parse(xhr.responseText)
-      //       if (status === 10000) {
-      //         if (done === 0) {
-      //           history.replace('/qa')
-      //         } else {
-      //           Toast.success('您今天已经答过题了...')
-      //         }
-      //       } else if (status === 10011) {
-      //         Toast.fail('请确认信息无误后重试...')
-      //       }
-      //     }
-      //   }
-      // }
       const { Status: status, Done: done } = await fetch(`${API}/user/login`, {
         method: 'POST',
         body: `stuNum=${id}&stuName=${name}`,
@@ -41,6 +20,10 @@ const Login = () => {
       }).then(res => res.json())
 
       if (status === 10000) {
+        localStorage.setItem('info', JSON.stringify({
+          name,
+          id,
+        }))
         if (done === 0) {
           history.replace('/qa')
         } else {
@@ -54,6 +37,15 @@ const Login = () => {
       Toast.fail('网络错误，请重试...')
     }
   }
+
+  useEffect(() => {
+    const info = JSON.parse(localStorage.getItem('info'))
+    if (info) {
+      setId(info.id)
+      setName(info.name)
+      onLogin(info.id, info.name)
+    }
+  }, [])
 
   return (
     <div className="login-wrapper">
@@ -75,7 +67,7 @@ const Login = () => {
         }}
         clear
       >学号：</InputItem>
-      <Button onClick={onLogin} type="primary" className="btn">确定</Button>
+      <Button onClick={() => onLogin(id, name)} type="primary" className="btn">确定</Button>
     </div>
   )
 }

@@ -83,10 +83,26 @@ const QandA = () => {
             {question.Subject}
           </div>
           <List renderHeader={() => 'Your answer:'} className="answers">
-            <RadioItem checked={answers[index.current] === 'A'} onChange={() => onChange('A')}>A: {question.A}</RadioItem>
-            <RadioItem checked={answers[index.current] === 'B'} onChange={() => onChange('B')}>B: {question.B}</RadioItem>
-            <RadioItem checked={answers[index.current] === 'C'} onChange={() => onChange('C')}>C: {question.C}</RadioItem>
-            <RadioItem checked={answers[index.current] === 'D'} onChange={() => onChange('D')}>D: {question.D}</RadioItem>
+            <RadioItem
+              checked={answers[index.current] === 'A'}
+              onChange={() => onChange('A')}
+              style={{ background: answers[index.current] && question.Answer === 'A' && '#90ee8f' }}
+            >A: {question.A}</RadioItem>
+            <RadioItem
+              checked={answers[index.current] === 'B'}
+              onChange={() => onChange('B')}
+              style={{ background: answers[index.current] && question.Answer === 'B' && '#90ee8f' }}
+            >B: {question.B}</RadioItem>
+            <RadioItem
+              checked={answers[index.current] === 'C'}
+              onChange={() => onChange('C')}
+              style={{ background: answers[index.current] && question.Answer === 'C' && '#90ee8f' }}
+            >C: {question.C}</RadioItem>
+            <RadioItem
+              checked={answers[index.current] === 'D'}
+              onChange={() => onChange('D')}
+              style={{ background: answers[index.current] && question.Answer === 'D' && '#90ee8f' }}
+            >D: {question.D}</RadioItem>
           </List>
           <div className="explain">
             {answers[index.current] && question.Explain}
